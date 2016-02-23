@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias p="cd ~/projects"
+
+# Always enable colored `grep` output
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# Always enable colored `ls` output
+alias ls="ls --color"
+
+# Manage config stuff
+alias config="git --git-dir=\$HOME/.cfg --work-tree=\$HOME"
+alias reload=". ~/.zshrc && echo 'ZSH config reloaded'"
+
+# Software updates
+alias update="sudo apt-get update; sudo apt-get upgrade"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep 'chrome --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs -I '{}' kill '{}'"
