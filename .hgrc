@@ -11,8 +11,3 @@ username = Thomas Moen <thomas@moen.io>
 progress =
 color =
 shelve =
-
-[alias]
-slog = log --style ~/etc/mercurial-cli-templates/map-cmdline.slog -l 20
-nlog = log --style ~/etc/mercurial-cli-templates/map-cmdline.nlog -l 5
-sglog = log -G --style ~/etc/mercurial-cli-templates/map-cmdline.sglog -l 10
