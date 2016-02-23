@@ -3,7 +3,7 @@
 # Source various utils
 source ~/.path
 source ~/.aliases
-source /usr/local/share/antigen.zsh
+source ~/.antigen/antigen.zsh
 
 # Use oh-my-zsh library
 antigen use oh-my-zsh
