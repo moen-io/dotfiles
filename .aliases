@@ -16,6 +16,10 @@ alias ls="ls --color"
 alias config="git --git-dir=\$HOME/.cfg --work-tree=\$HOME"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded'"
 
+# Mercurial
+alias hgu="hg pull -u"
+alias hgs="hg status"
+
 # Software updates
 alias update="sudo apt-get update; sudo apt-get upgrade"
 

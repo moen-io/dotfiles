@@ -1,13 +1,6 @@
-# example user config (see "hg help config" for more info)
 [ui]
-# name and email, e.g.
-# username = Jane Thomas Doe <jdoe@example.com>
 username = Thomas Moen <thomas@moen.io>
 
 [extensions]
-# uncomment these lines to enable some popular extensions
-# (see "hg help extensions" for more info)
-#
-progress =
 color =
 shelve =
