@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function hgc() {
+	return hg pull -u\
+		&& hg commit -Am "$1"\
+		&& hg push\
+	;
+}
