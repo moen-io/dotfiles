@@ -2,6 +2,32 @@
 
 # IP geolocation data
 function ipinfo() {
-    curl ipinfo.io/$1
+    curl ipinfo.io/"$1"
     echo
+}
+
+# Simple desktop capture
+function capture() {
+	output=$1
+
+	# Generate a file name if none is provided
+	if [[ -z $output ]]; then
+		output=capture-$(date +%s).webm
+	fi
+
+	echo "Capturing screen to $output..."
+	echo "Press ctrl-c to stop encoding"
+
+	# Get the resolution of display #0
+	resolution=$(xrandr | grep -m 1 "*" | grep -Po '\d+x\d+')
+
+	avconv -f x11grab -s "$resolution" -r 30 -i :0 -deadline realtime\
+		-b 5000000 -minrate 200000 -maxrate 40000000 -loglevel quiet "$output"
+
+	if [[ $? -gt 0 ]]; then
+		echo "Error: Unable to save capture"
+		return 1
+	fi
+
+	echo
 }
