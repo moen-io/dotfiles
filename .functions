@@ -2,7 +2,7 @@
 
 # IP geolocation data
 function ipinfo() {
-    curl -w "\n" ipinfo.io/"$1"
+    curl -w "\n" http://ipinfo.io/"$1"
 }
 
 # Simple desktop capture
@@ -11,7 +11,7 @@ function capture() {
 
 	# Generate a file name if none is provided
 	if [[ -z $output ]]; then
-		output=capture-$(date +%s).webm
+		output=capture-$(date +%FT%H_%M_%S).webm
 	fi
 
 	echo "Capturing screen to $output..."
