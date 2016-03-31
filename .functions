@@ -2,13 +2,12 @@
 
 # IP geolocation data
 function ipinfo() {
-    curl ipinfo.io/"$1"
-    echo
+    curl -w "\n" ipinfo.io/"$1"
 }
 
 # Simple desktop capture
 function capture() {
-	output=$1
+	local output=$1
 
 	# Generate a file name if none is provided
 	if [[ -z $output ]]; then
@@ -18,16 +17,28 @@ function capture() {
 	echo "Capturing screen to $output..."
 	echo "Press ctrl-c to stop encoding"
 
-	# Get the resolution of display #0
-	resolution=$(xrandr | grep -m 1 "*" | grep -Po '\d+x\d+')
+	# Get the resolution of the default display
+	local resolution=$(xrandr | grep -m 1 "*" | grep -Po '\d+x\d+')
 
-	avconv -f x11grab -s "$resolution" -r 30 -i :0 -deadline realtime\
-		-b 5000000 -minrate 200000 -maxrate 40000000 -loglevel quiet "$output"
+	# Grab the full screen area of the default display and output it to a file
+	avconv -f x11grab -r 30 -s "$resolution" -i "$DISPLAY" -deadline realtime\
+		-b 5M -minrate 500k -maxrate 40M -loglevel error "$output" || echo
+}
 
-	if [[ $? -gt 0 ]]; then
-		echo "Error: Unable to save capture"
-		return 1
+# Convenient calculation
+function calc() {
+	echo "$@" | bc -l
+}
+
+# Simple http server
+function server() {
+	local port=$1
+
+	# Default port
+	if [[ -z $port ]]; then
+		port=8080
 	fi
 
-	echo
+	echo "http://localhost:$port"
+	python 2>/dev/null -m SimpleHTTPServer $port || echo
 }
