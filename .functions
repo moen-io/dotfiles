@@ -32,21 +32,22 @@ function calc() {
 
 # Simple http server
 function webserver() {
-	local port=$1
-
-	# Default port
-	if [[ -z $port ]]; then
-		port=8080
-	fi
+	local port=${1:-8080}
 
 	echo "http://localhost:$port"
-	python 2>/dev/null -m SimpleHTTPServer $port || echo
+	python 2>/dev/null -m SimpleHTTPServer "$port" || echo
 }
 
 # Adds latency and packet loss to eth0.
 # For when you network is simply too fast.
 function slowmode() {
-	sudo tc qdisc add dev eth0 root netem loss 10% delay 200ms 10ms 25%
+	local delay=${1:-200}
+	local loss=${2:-20}
+
+	# Apply network latency and packet loss
+	sudo tc qdisc add dev eth0 root netem loss "$loss%" delay "${delay}ms" 10ms 25%
+
+	# Make sure to disable it again on exit
 	trap 'sudo tc qdisc del dev eth0 root; echo; return' SIGINT SIGTERM
 
 	echo "Slow mode enabled"
