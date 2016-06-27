@@ -30,14 +30,6 @@ function calc() {
 	echo "$@" | bc -l
 }
 
-# Simple http server
-function webserver() {
-	local port=${1:-8080}
-
-	echo "http://localhost:$port"
-	python 2>/dev/null -m SimpleHTTPServer "$port" || echo
-}
-
 # Adds latency and packet loss to eth0.
 # For when you network is simply too fast.
 function slowmode() {
