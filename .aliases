@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Shortcuts
-alias dl="cd ~/Downloads"
-alias p="cd ~/projects"
-
 # Always enable colored `grep` output
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
@@ -21,9 +17,6 @@ alias hgs="hg status"
 alias winxp="virtualbox --startvm 'IE8 - WinXP'"
 alias vista="virtualbox --startvm 'IE7 - Vista'"
 alias win7="virtualbox --startvm 'IE11 - Win7'"
-
-# Software updates
-alias update="sudo apt-get update; sudo apt-get upgrade"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
