@@ -6,4 +6,4 @@ source ~/.aliases
 source ~/.functions
 
 # Export various variables
-export GOPATH=~/code/go
+export GOPATH=~
