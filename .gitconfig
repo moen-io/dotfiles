@@ -3,3 +3,8 @@
 	email = thomas@moen.io
 [core]
 	editor = vim
+[push]
+	default = matching
+[credential]
+	helper = cache --timeout=3600
+	
