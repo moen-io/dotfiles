@@ -1,5 +1,9 @@
 #!/bin/bash
 
+function homestead() {
+    (cd ~/Homestead && vagrant $*)
+}
+
 # IP geolocation data
 function ipinfo() {
     curl -w "\n" http://ipinfo.io/"$1"

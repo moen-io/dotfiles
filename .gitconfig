@@ -3,6 +3,7 @@
 	email = thomas@moen.io
 [core]
 	editor = vim
+	quotepath = false
 [push]
 	default = matching
 [credential]
