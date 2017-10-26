@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Always enable colored `grep` output
-alias grep="grep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias egrep="egrep --color=auto"
+# Omit long lines from rg output
+alias rg="rg -S"
 
 # Manage config stuff
 alias config="git --git-dir=\$HOME/.cfg --work-tree=\$HOME"
