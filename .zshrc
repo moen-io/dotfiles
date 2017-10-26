@@ -9,11 +9,9 @@ source ~/.antigen/antigen.zsh
 # Use oh-my-zsh library
 antigen use oh-my-zsh
 
-# Antigen plugins
-antigen bundle git
-
-# Antigen theme
-antigen theme amuse
+# Themes and plugins
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
 
 # Apply antigen settings
 antigen apply
@@ -27,7 +25,6 @@ zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:[[:ascii:]]||[[:ascii:]]=** r:|=* m:{a-z\-}={A-Z\_}'
-
 
 export NVM_DIR="/home/thomas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
