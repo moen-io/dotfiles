@@ -6,10 +6,12 @@ color =
 shelve =
 convert =
 purge =
-fsmonitor =
+mq =
+show =
 
 [alias]
 slog = log --style ~/.config/mercurial-cli-templates/map-cmdline.slog -l 20
 nlog = log --style ~/.config/mercurial-cli-templates/map-cmdline.nlog -l 5
 sglog = log -G --style ~/.config/mercurial-cli-templates/map-cmdline.sglog -l 10
+dlog = log -G --style ~/.config/mercurial-cli-templates/map-cmdline.dlog -l 10
 
