@@ -15,18 +15,22 @@ function capture() {
 
 	# Generate a file name if none is provided
 	if [[ -z $output ]]; then
-		output=capture-$(date +%FT%H_%M_%S).mp4
+		output=capture-$(date +%FT%H_%M_%S).webm
 	fi
 
-	echo "Capturing screen to $output..."
-	echo "Press [q] to stop encoding"
-
-	# Get the resolution of the default display
 	local resolution=$(xrandr | grep -m 1 "*" | grep -Po '\d+x\d+')
+	local tmp=$(mktemp -u tmp.XXXX.mkv)
 
-	# Grab the full screen area of the default display and output it to a file
-	ffmpeg -f x11grab -framerate 30 -video_size "$resolution" -i "$DISPLAY"\
-		-loglevel error  "$output"
+	# Capture full screen to a temp file. This is a lossless encoding to
+	# avoid dropping frames.
+	echo "Capturing screen. Press [q] to stop."
+	ffmpeg -video_size "$resolution" -framerate 30 -f x11grab -i "$DISPLAY"\
+		-c:v libx264 -qp 0 -preset ultrafast -loglevel error "$tmp"
+	
+	# Re-encode the lossless capture and save to output.
+	echo "Encoding $output..."
+	ffmpeg -i "$tmp" -c:v libvpx-vp9 -crf 50 -b:v 0 -threads 4 -loglevel error "$output"
+	rm "$tmp"
 }
 
 # Convenient calculation
