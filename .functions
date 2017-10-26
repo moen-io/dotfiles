@@ -44,11 +44,14 @@ function slowmode() {
 	local delay=${1:-200}
 	local loss=${2:-20}
 
+	# Find the defualt network interface
+	local iface=$(route | grep '^default' | grep -o '[^ ]*$')
+
 	# Apply network latency and packet loss
-	sudo tc qdisc add dev eth0 root netem loss "$loss%" delay "${delay}ms" 10ms 25%
+	sudo tc qdisc add dev "$iface" root netem loss "$loss%" delay "${delay}ms" 10ms 25%
 
 	# Make sure to disable it again on exit
-	trap 'sudo tc qdisc del dev eth0 root; echo; return' SIGINT SIGTERM
+	trap "sudo tc qdisc del dev $iface root; echo; return" SIGINT SIGTERM
 
 	echo "Slow mode enabled"
 	echo "Press ctrl-c to disable slow mode"
